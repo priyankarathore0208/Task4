@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BrightFuture Foundation — Empowering Youth Through Education</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --ink: #1a1a18;
+    --ink-muted: #5a5a56;
+    --ink-faint: #999994;
+    --surface: #f9f7f2;
+    --surface-2: #f0ede4;
+    --white: #ffffff;
+    --accent: #1d9e75;
+    --accent-dark: #0f6e56;
+    --accent-light: #e1f5ee;
+    --warm: #d85a30;
+    --warm-light: #faece7;
+    --border: rgba(26,26,24,0.12);
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'Inter', system-ui, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--surface);
+    color: var(--ink);
+    line-height: 1.6;
+    font-size: 16px;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(249,247,242,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 5vw;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 10px;
+    font-family: var(--serif); font-size: 1.25rem; color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-logo-mark {
+    width: 32px; height: 32px; border-radius: 8px;
+    background: var(--accent); display: flex; align-items: center; justify-content: center;
+  }
+  .nav-logo-mark svg { width: 18px; height: 18px; fill: white; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--ink-muted);
+    font-size: 0.875rem; font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-cta {
+    background: var(--ink); color: white;
+    padding: 0.5rem 1.25rem; border-radius: 6px;
+    text-decoration: none; font-size: 0.875rem; font-weight: 500;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--accent); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 92vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center; gap: 4rem;
+    padding: 6rem 5vw 4rem;
+    max-width: 1200px; margin: 0 auto;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--accent-light); color: var(--accent-dark);
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; padding: 6px 14px; border-radius: 20px;
+    margin-bottom: 1.5rem;
+  }
+  .hero-eyebrow::before {
+    content: ''; width: 6px; height: 6px;
+    background: var(--accent); border-radius: 50%;
+  }
+  .hero h1 {
+    font-family: var(--serif); font-size: clamp(2.8rem, 5vw, 4.2rem);
+    line-height: 1.1; color: var(--ink); margin-bottom: 1.5rem;
+    font-weight: 400;
+  }
+  .hero h1 em { color: var(--accent); font-style: italic; }
+  .hero-desc {
+    font-size: 1.125rem; color: var(--ink-muted);
+    max-width: 480px; margin-bottom: 2.5rem; line-height: 1.7;
+  }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--accent); color: white;
+    padding: 0.875rem 2rem; border-radius: 8px;
+    text-decoration: none; font-weight: 600; font-size: 0.9375rem;
+    transition: background 0.2s; display: inline-block;
+  }
+  .btn-primary:hover { background: var(--accent-dark); }
+  .btn-outline {
+    border: 1.5px solid var(--border); color: var(--ink);
+    padding: 0.875rem 2rem; border-radius: 8px;
+    text-decoration: none; font-weight: 500; font-size: 0.9375rem;
+    transition: border-color 0.2s; display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--ink); }
+
+  .hero-visual {
+    position: relative; display: flex; justify-content: center;
+  }
+  .hero-card-stack { position: relative; width: 340px; height: 420px; }
+  .hero-card {
+    position: absolute; border-radius: 16px;
+    overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+  }
+  .hero-card-main {
+    width: 300px; height: 380px; top: 20px; left: 20px;
+    background: linear-gradient(160deg, #1d9e75 0%, #0f6e56 100%);
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 2rem;
+  }
+  .hero-card-main .stat { color: rgba(255,255,255,0.65); font-size: 0.75rem; margin-bottom: 0.25rem; }
+  .hero-card-main .number { color: white; font-family: var(--serif); font-size: 3rem; line-height: 1; }
+  .hero-card-main .label { color: rgba(255,255,255,0.8); font-size: 0.875rem; margin-top: 0.5rem; }
+  .hero-card-float {
+    width: 180px; height: 100px; top: 0; right: 0;
+    background: white; padding: 1.25rem;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .hero-card-float .f-label { font-size: 0.7rem; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.06em; }
+  .hero-card-float .f-val { font-family: var(--serif); font-size: 1.75rem; color: var(--warm); margin-top: 2px; }
+  .hero-card-float .f-sub { font-size: 0.75rem; color: var(--ink-muted); margin-top: 2px; }
+
+  /* ─── STATS STRIP ─── */
+  .stats-strip {
+    background: var(--ink); color: white;
+    padding: 3rem 5vw;
+  }
+  .stats-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem;
+  }
+  .stat-item { text-align: center; }
+  .stat-num { font-family: var(--serif); font-size: 2.75rem; color: var(--accent); line-height: 1; }
+  .stat-label { font-size: 0.875rem; color: rgba(255,255,255,0.6); margin-top: 0.5rem; }
+
+  /* ─── SECTION COMMON ─── */
+  section { padding: 6rem 5vw; }
+  .section-inner { max-width: 1200px; margin: 0 auto; }
+  .section-tag {
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--accent);
+    margin-bottom: 1rem; display: block;
+  }
+  .section-title {
+    font-family: var(--serif); font-size: clamp(2rem, 3.5vw, 2.8rem);
+    color: var(--ink); font-weight: 400; line-height: 1.2;
+    max-width: 560px; margin-bottom: 1.25rem;
+  }
+  .section-subtitle { font-size: 1.0625rem; color: var(--ink-muted); max-width: 540px; line-height: 1.7; }
+
+  /* ─── ABOUT ─── */
+  #about { background: var(--white); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; margin-top: 4rem; }
+  .about-image-block { position: relative; }
+  .about-img-placeholder {
+    width: 100%; aspect-ratio: 4/3; border-radius: 16px;
+    background: var(--accent-light);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden; position: relative;
+  }
+  .about-img-placeholder svg { width: 80px; height: 80px; opacity: 0.3; }
+  .about-badge {
+    position: absolute; bottom: -20px; right: -20px;
+    background: var(--warm); color: white;
+    width: 110px; height: 110px; border-radius: 50%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    font-family: var(--serif); box-shadow: 0 4px 20px rgba(216,90,48,0.3);
+  }
+  .about-badge .yr { font-size: 1.75rem; line-height: 1; }
+  .about-badge .yr-label { font-size: 0.65rem; opacity: 0.85; margin-top: 2px; font-family: var(--sans); }
+  .about-text-block { }
+  .about-points { list-style: none; margin-top: 2rem; display: flex; flex-direction: column; gap: 1rem; }
+  .about-points li {
+    display: flex; gap: 1rem; align-items: flex-start;
+    padding: 1.25rem; border-radius: 10px; background: var(--surface);
+  }
+  .about-icon {
+    width: 40px; height: 40px; border-radius: 8px; flex-shrink: 0;
+    background: var(--accent-light); display: flex; align-items: center; justify-content: center;
+  }
+  .about-icon svg { width: 20px; height: 20px; stroke: var(--accent); fill: none; stroke-width: 2; stroke-linecap: round; }
+  .about-point-title { font-weight: 600; font-size: 0.9375rem; color: var(--ink); margin-bottom: 2px; }
+  .about-point-desc { font-size: 0.875rem; color: var(--ink-muted); }
+
+  /* ─── PROGRAMS ─── */
+  #programs { background: var(--surface); }
+  .programs-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; }
+  .programs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .program-card {
+    background: white; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--border); transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .program-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(0,0,0,0.08); }
+  .program-top {
+    height: 140px; display: flex; align-items: center; justify-content: center;
+    position: relative; font-size: 3rem;
+  }
+  .program-top.green { background: var(--accent-light); }
+  .program-top.warm { background: var(--warm-light); }
+  .program-top.blue { background: #e6f1fb; }
+  .program-body { padding: 1.5rem; }
+  .program-tag {
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; margin-bottom: 0.5rem;
+  }
+  .program-tag.green { color: var(--accent-dark); }
+  .program-tag.warm { color: var(--warm); }
+  .program-tag.blue { color: #185fa5; }
+  .program-name { font-family: var(--serif); font-size: 1.25rem; color: var(--ink); margin-bottom: 0.75rem; }
+  .program-desc { font-size: 0.875rem; color: var(--ink-muted); line-height: 1.65; }
+  .program-meta {
+    margin-top: 1.25rem; padding-top: 1rem;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between;
+    font-size: 0.8rem; color: var(--ink-faint);
+  }
+  .program-meta strong { color: var(--ink); font-weight: 600; }
+
+  /* ─── IMPACT ─── */
+  #impact { background: var(--white); }
+  .impact-layout { display: grid; grid-template-columns: 5fr 4fr; gap: 5rem; align-items: start; margin-top: 4rem; }
+  .impact-stories { display: flex; flex-direction: column; gap: 1.5rem; }
+  .story-card {
+    background: var(--surface); border-radius: 12px;
+    padding: 1.5rem; border-left: 3px solid var(--accent);
+  }
+  .story-quote {
+    font-family: var(--serif); font-size: 1.0625rem; color: var(--ink);
+    line-height: 1.6; margin-bottom: 1rem; font-style: italic;
+  }
+  .story-person { display: flex; align-items: center; gap: 10px; }
+  .story-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.8rem; font-weight: 600; color: white; flex-shrink: 0;
+  }
+  .story-name { font-size: 0.875rem; font-weight: 600; color: var(--ink); }
+  .story-role { font-size: 0.8rem; color: var(--ink-muted); }
+  .impact-numbers { }
+  .impact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .impact-num-card {
+    background: var(--surface); border-radius: 12px; padding: 1.5rem;
+    text-align: center;
+  }
+  .impact-num-card .big { font-family: var(--serif); font-size: 2.5rem; line-height: 1; }
+  .impact-num-card .desc { font-size: 0.8rem; color: var(--ink-muted); margin-top: 0.5rem; line-height: 1.4; }
+  .color-green .big { color: var(--accent); }
+  .color-warm .big { color: var(--warm); }
+  .color-blue .big { color: #185fa5; }
+  .color-purple .big { color: #534ab7; }
+
+  /* ─── GET INVOLVED ─── */
+  #get-involved {
+    background: var(--ink); color: white;
+    position: relative; overflow: hidden;
+  }
+  #get-involved::before {
+    content: '';
+    position: absolute; top: -200px; right: -200px;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: rgba(29,158,117,0.08);
+    pointer-events: none;
+  }
+  .involve-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3.5rem; }
+  .involve-card {
+    border: 1px solid rgba(255,255,255,0.12); border-radius: 14px;
+    padding: 2rem; transition: border-color 0.2s;
+  }
+  .involve-card:hover { border-color: var(--accent); }
+  .involve-icon {
+    width: 48px; height: 48px; border-radius: 10px;
+    background: rgba(29,158,117,0.15); display: flex;
+    align-items: center; justify-content: center; margin-bottom: 1.25rem;
+  }
+  .involve-icon svg { width: 24px; height: 24px; stroke: var(--accent); fill: none; stroke-width: 2; stroke-linecap: round; }
+  .involve-title { font-family: var(--serif); font-size: 1.2rem; margin-bottom: 0.75rem; color: white; }
+  .involve-desc { font-size: 0.875rem; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 1.5rem; }
+  .involve-link {
+    font-size: 0.875rem; color: var(--accent); font-weight: 600;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 4px;
+  }
+  .involve-link::after { content: '→'; }
+  .involve-link:hover { color: #9fe1cb; }
+
+  /* ─── CONTACT ─── */
+  #contact { background: var(--surface); }
+  .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; margin-top: 4rem; }
+  .contact-info { }
+  .contact-info p { color: var(--ink-muted); line-height: 1.7; margin-bottom: 2rem; }
+  .contact-details { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-item { display: flex; gap: 1rem; align-items: center; }
+  .contact-item-icon {
+    width: 40px; height: 40px; border-radius: 8px;
+    background: var(--accent-light); flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .contact-item-icon svg { width: 18px; height: 18px; stroke: var(--accent); fill: none; stroke-width: 2; stroke-linecap: round; }
+  .contact-item-label { font-size: 0.75rem; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.06em; }
+  .contact-item-val { font-size: 0.9375rem; color: var(--ink); font-weight: 500; }
+  .contact-form-card {
+    background: white; border-radius: 16px; padding: 2.5rem;
+    border: 1px solid var(--border);
+  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+  .form-field { display: flex; flex-direction: column; gap: 6px; }
+  .form-field label { font-size: 0.8125rem; font-weight: 600; color: var(--ink-muted); }
+  .form-field input, .form-field textarea, .form-field select {
+    border: 1px solid var(--border); border-radius: 8px;
+    padding: 0.7rem 0.875rem; font-size: 0.9375rem;
+    font-family: var(--sans); color: var(--ink);
+    background: var(--surface); transition: border-color 0.2s;
+    outline: none;
+  }
+  .form-field input:focus, .form-field textarea:focus, .form-field select:focus { border-color: var(--accent); }
+  .form-field textarea { resize: vertical; min-height: 120px; }
+  .form-field.full { grid-column: 1/-1; }
+  .form-submit {
+    width: 100%; background: var(--accent); color: white; border: none;
+    padding: 0.9rem; border-radius: 8px; font-size: 0.9375rem;
+    font-weight: 600; cursor: pointer; transition: background 0.2s;
+    font-family: var(--sans); margin-top: 1rem;
+  }
+  .form-submit:hover { background: var(--accent-dark); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--ink); color: rgba(255,255,255,0.55);
+    padding: 4rem 5vw 2rem;
+  }
+  .footer-inner { max-width: 1200px; margin: 0 auto; }
+  .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .footer-brand { }
+  .footer-logo { font-family: var(--serif); font-size: 1.25rem; color: white; margin-bottom: 1rem; display: flex; align-items: center; gap: 10px; }
+  .footer-tagline { font-size: 0.875rem; line-height: 1.65; max-width: 280px; }
+  .footer-col h4 { color: white; font-size: 0.875rem; font-weight: 600; margin-bottom: 1rem; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .footer-col ul a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
+  .footer-col ul a:hover { color: var(--accent); }
+  .footer-bottom { padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; }
+  .footer-bottom a { color: rgba(255,255,255,0.5); text-decoration: none; }
+  .footer-bottom a:hover { color: var(--accent); }
+  .social-links { display: flex; gap: 1rem; }
+  .social-link {
+    width: 36px; height: 36px; border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.15);
+    display: flex; align-items: center; justify-content: center;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .social-link:hover { border-color: var(--accent); background: rgba(29,158,117,0.1); }
+  .social-link svg { width: 16px; height: 16px; fill: rgba(255,255,255,0.6); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; gap: 3rem; }
+    .hero-visual { display: none; }
+    .stats-inner { grid-template-columns: repeat(2, 1fr); }
+    .about-grid, .impact-layout, .contact-layout { grid-template-columns: 1fr; }
+    .about-badge { display: none; }
+    .programs-grid { grid-template-columns: 1fr 1fr; }
+    .involve-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .programs-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    nav .nav-links { display: none; }
+  }
+  @media (max-width: 600px) {
+    .programs-grid { grid-template-columns: 1fr; }
+    .stats-inner { grid-template-columns: repeat(2, 1fr); }
+    .form-row { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#home" class="nav-logo">
+    <div class="nav-logo-mark">
+      <svg viewBox="0 0 24 24"><path d="M12 2L3 9v12h6v-7h6v7h6V9z"/></svg>
+    </div>
+    BrightFuture Foundation
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#programs">Programs</a></li>
+    <li><a href="#impact">Impact</a></li>
+    <li><a href="#get-involved">Get Involved</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Donate Now</a>
+</nav>
+
+<!-- HERO -->
+<div id="home" style="max-width:1200px; margin: 0 auto;">
+<div class="hero">
+  <div class="hero-text">
+    <div class="hero-eyebrow">Registered NGO · Est. 2010</div>
+    <h1>Building <em>brighter</em> futures through education</h1>
+    <p class="hero-desc">We believe every child deserves access to quality education, mentorship, and opportunity — regardless of where they were born or what their family earns.</p>
+    <div class="hero-actions">
+      <a href="#get-involved" class="btn-primary">Support a Child</a>
+      <a href="#programs" class="btn-outline">Our Programs</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-card-stack">
+      <div class="hero-card hero-card-main">
+        <div class="stat">Children reached</div>
+        <div class="number">12,400+</div>
+        <div class="label">across 6 states in India</div>
+      </div>
+      <div class="hero-card hero-card-float">
+        <div class="f-label">Scholarship rate</div>
+        <div class="f-val">94%</div>
+        <div class="f-sub">recipients graduate</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-num">12,400+</div>
+      <div class="stat-label">Children supported</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">320</div>
+      <div class="stat-label">Partner schools</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">14 yrs</div>
+      <div class="stat-label">Years of impact</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">₹4.2Cr</div>
+      <div class="stat-label">Scholarships awarded</div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <span class="section-tag">Who we are</span>
+    <h2 class="section-title">A foundation built on belief in human potential</h2>
+    <div class="about-grid">
+      <div class="about-image-block">
+        <div class="about-img-placeholder">
+          <svg viewBox="0 0 64 64" fill="none" stroke="#1d9e75" stroke-width="1.5" stroke-linecap="round"><circle cx="32" cy="20" r="10"/><path d="M12 52c0-11 8.9-20 20-20s20 8.9 20 20"/><path d="M46 26c0-7.7 6.3-14 14-14M50 22l-4 4 4 4"/></svg>
+          <!-- decorative illustration placeholder -->
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1rem;">
+            <div style="width:80px;height:80px;border-radius:50%;background:rgba(29,158,117,0.15);display:flex;align-items:center;justify-content:center;">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#1d9e75" stroke-width="1.5" stroke-linecap="round"><path d="M12 2L3 9v12h6v-7h6v7h6V9z"/></svg>
+            </div>
+            <div style="font-family:'DM Serif Display',serif;font-size:1.1rem;color:#0f6e56;text-align:center;padding:0 2rem;">Empowering 12,400+ children since 2010</div>
+          </div>
+        </div>
+        <div class="about-badge">
+          <span class="yr">14</span>
+          <span class="yr-label">Years of<br>Service</span>
+        </div>
+      </div>
+      <div class="about-text-block">
+        <p style="color:var(--ink-muted);line-height:1.75;margin-bottom:1.5rem;">BrightFuture Foundation was started by a small group of teachers in Mysuru who saw firsthand how poverty forces children to drop out of school. Today, we operate across Karnataka, Maharashtra, Rajasthan, Bihar, Odisha, and Assam.</p>
+        <p style="color:var(--ink-muted);line-height:1.75;margin-bottom:1.5rem;">Our approach is holistic: we don't just provide money. We surround each child with mentors, learning materials, career counselling, and a community that believes in them.</p>
+        <ul class="about-points">
+          <li>
+            <div class="about-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg></div>
+            <div>
+              <div class="about-point-title">Merit & need-based scholarships</div>
+              <div class="about-point-desc">Covering school fees, books, uniforms, and digital devices for qualifying students.</div>
+            </div>
+          </li>
+          <li>
+            <div class="about-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+            <div>
+              <div class="about-point-title">Dedicated mentorship network</div>
+              <div class="about-point-desc">1,200+ volunteer mentors from industry and academia guiding students weekly.</div>
+            </div>
+          </li>
+          <li>
+            <div class="about-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 9h6M9 12h6M9 15h4"/></svg></div>
+            <div>
+              <div class="about-point-title">Transparent governance</div>
+              <div class="about-point-desc">80G registered. Annual reports and fund-use disclosures published every quarter.</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMS -->
+<section id="programs">
+  <div class="section-inner">
+    <div class="programs-header">
+      <div>
+        <span class="section-tag">What we do</span>
+        <h2 class="section-title">Programs designed around real barriers</h2>
+      </div>
+      <a href="#contact" class="btn-primary">Partner with us</a>
+    </div>
+    <div class="programs-grid">
+      <div class="program-card">
+        <div class="program-top green">📚</div>
+        <div class="program-body">
+          <div class="program-tag green">Education</div>
+          <div class="program-name">Scholarship Program</div>
+          <p class="program-desc">Full and partial scholarships for students from Class 6 through undergraduate studies, with career counselling and placement support built in.</p>
+          <div class="program-meta">
+            <span>Beneficiaries: <strong>7,200+</strong></span>
+            <span>States: <strong>6</strong></span>
+          </div>
+        </div>
+      </div>
+      <div class="program-card">
+        <div class="program-top warm">💻</div>
+        <div class="program-body">
+          <div class="program-tag warm">Digital Skills</div>
+          <div class="program-name">Code for Bharat</div>
+          <p class="program-desc">Free coding and digital literacy bootcamps in rural government schools, equipping Class 8–12 students with skills for a technology-driven economy.</p>
+          <div class="program-meta">
+            <span>Students trained: <strong>3,100+</strong></span>
+            <span>Schools: <strong>85</strong></span>
+          </div>
+        </div>
+      </div>
+      <div class="program-card">
+        <div class="program-top blue">🌱</div>
+        <div class="program-body">
+          <div class="program-tag blue">Women's Empowerment</div>
+          <div class="program-name">Girl Rising</div>
+          <p class="program-desc">A dedicated program combating dropout rates among girls aged 11–18 through safe learning spaces, female mentors, and life skills education.</p>
+          <div class="program-meta">
+            <span>Girls enrolled: <strong>2,100+</strong></span>
+            <span>Retention: <strong>91%</strong></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT -->
+<section id="impact">
+  <div class="section-inner">
+    <span class="section-tag">Our impact</span>
+    <h2 class="section-title">Numbers that mean something</h2>
+    <div class="impact-layout">
+      <div class="impact-stories">
+        <div class="story-card">
+          <p class="story-quote">"Before BrightFuture, I was going to drop out after Class 8 to help my father. Today I'm in my second year of engineering at NIT Surathkal."</p>
+          <div class="story-person">
+            <div class="story-avatar" style="background:#1d9e75;">RK</div>
+            <div>
+              <div class="story-name">Rohit Kumar, 20</div>
+              <div class="story-role">Scholarship recipient, Bihar · 2020 batch</div>
+            </div>
+          </div>
+        </div>
+        <div class="story-card" style="border-left-color: var(--warm);">
+          <p class="story-quote">"The Girl Rising program didn't just keep me in school — it made me believe I could lead. I'm now a community health worker training other girls."</p>
+          <div class="story-person">
+            <div class="story-avatar" style="background:#d85a30;">SA</div>
+            <div>
+              <div class="story-name">Sunita Anjali, 24</div>
+              <div class="story-role">Girl Rising alumna, Odisha · 2017 batch</div>
+            </div>
+          </div>
+        </div>
+        <div class="story-card" style="border-left-color: #185fa5;">
+          <p class="story-quote">"Code for Bharat taught me Python in six months. I got an internship at a Pune startup while still in Class 12. I never thought that was possible for someone from my village."</p>
+          <div class="story-person">
+            <div class="story-avatar" style="background:#185fa5;">PM</div>
+            <div>
+              <div class="story-name">Priya More, 18</div>
+              <div class="story-role">Code for Bharat alumna, Maharashtra · 2023 batch</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="impact-numbers">
+        <div class="impact-grid">
+          <div class="impact-num-card color-green">
+            <div class="big">94%</div>
+            <div class="desc">Scholarship recipients who complete secondary school</div>
+          </div>
+          <div class="impact-num-card color-warm">
+            <div class="big">₹4.2Cr</div>
+            <div class="desc">Total scholarships disbursed since 2010</div>
+          </div>
+          <div class="impact-num-card color-blue">
+            <div class="big">1,200+</div>
+            <div class="desc">Active volunteer mentors across the network</div>
+          </div>
+          <div class="impact-num-card color-purple">
+            <div class="big">320</div>
+            <div class="desc">Government and aided schools in our partnership</div>
+          </div>
+        </div>
+        <div style="margin-top:1.5rem; background:var(--surface); border-radius:12px; padding:1.5rem;">
+          <div style="font-size:0.75rem;color:var(--ink-faint);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.75rem;">Where your donation goes</div>
+          <div style="display:flex;flex-direction:column;gap:0.75rem;">
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:0.8rem;margin-bottom:4px;"><span style="color:var(--ink);">Scholarships & materials</span><span style="font-weight:600;color:var(--accent);">72%</span></div>
+              <div style="height:6px;background:var(--surface-2);border-radius:3px;"><div style="height:100%;width:72%;background:var(--accent);border-radius:3px;"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:0.8rem;margin-bottom:4px;"><span style="color:var(--ink);">Programs & mentorship</span><span style="font-weight:600;color:var(--warm);">20%</span></div>
+              <div style="height:6px;background:var(--surface-2);border-radius:3px;"><div style="height:100%;width:20%;background:var(--warm);border-radius:3px;"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:0.8rem;margin-bottom:4px;"><span style="color:var(--ink);">Operations & admin</span><span style="font-weight:600;color:#185fa5;">8%</span></div>
+              <div style="height:6px;background:var(--surface-2);border-radius:3px;"><div style="height:100%;width:8%;background:#185fa5;border-radius:3px;"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GET INVOLVED -->
+<section id="get-involved">
+  <div class="section-inner">
+    <span class="section-tag" style="color:#9fe1cb;">Take action</span>
+    <h2 class="section-title" style="color:white;">Three ways to make a difference</h2>
+    <div class="involve-grid">
+      <div class="involve-card">
+        <div class="involve-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+        </div>
+        <div class="involve-title">Donate</div>
+        <p class="involve-desc">₹500/month sponsors a child's textbooks and uniform. ₹5,000/year covers a full scholarship. 100% of funds go to programs — our operations are separately funded.</p>
+        <a href="#contact" class="involve-link">Donate now</a>
+      </div>
+      <div class="involve-card">
+        <div class="involve-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/><path d="M20 8v6M17 11h6"/></svg>
+        </div>
+        <div class="involve-title">Volunteer as a mentor</div>
+        <p class="involve-desc">Commit 2 hours a week to guide a student in your field — engineering, medicine, arts, business. Remote mentoring is available across all our locations.</p>
+        <a href="#contact" class="involve-link">Apply to mentor</a>
+      </div>
+      <div class="involve-card">
+        <div class="involve-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <div class="involve-title">Corporate partnerships</div>
+        <p class="involve-desc">CSR partnerships, employee volunteering programmes, and pro-bono skill grants. We issue 80G certificates and provide impact reports tailored to your reporting needs.</p>
+        <a href="#contact" class="involve-link">Partner with us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <span class="section-tag">Reach us</span>
+    <h2 class="section-title">Let's talk about how you can help</h2>
+    <div class="contact-layout">
+      <div class="contact-info">
+        <p>Whether you want to donate, volunteer, partner, or simply learn more about our work — we'd love to hear from you. Our team responds within one business day.</p>
+        <div class="contact-details">
+          <div class="contact-item">
+            <div class="contact-item-icon">
+              <svg viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <div class="contact-item-label">Head Office</div>
+              <div class="contact-item-val">#A2, New Kanthraj Urs Road, Mysuru, Karnataka 570023</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">
+              <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 11.42 19a19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 3.09 4.18 2 2 0 0 1 5.07 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L9.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div>
+              <div class="contact-item-label">Phone</div>
+              <div class="contact-item-val">+91 984 466 1444</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">
+              <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="m22 6-10 7L2 6"/></svg>
+            </div>
+            <div>
+              <div class="contact-item-label">Email</div>
+              <div class="contact-item-val">hello@brightfuturefoundation.org</div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:2rem;">
+          <div style="font-size:0.75rem;color:var(--ink-faint);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.75rem;">Registration details</div>
+          <div style="font-size:0.875rem;color:var(--ink-muted);line-height:1.8;">
+            Reg. No: KAR/NGO/2010/0472<br>
+            80G Certificate No: BFF/80G/2010<br>
+            FCRA Registration: 094010247
+          </div>
+        </div>
+      </div>
+      <div class="contact-form-card">
+        <h3 style="font-family:var(--serif);font-size:1.35rem;color:var(--ink);margin-bottom:1.5rem;">Send us a message</h3>
+        <div class="form-row">
+          <div class="form-field">
+            <label for="fname">First name</label>
+            <input type="text" id="fname" placeholder="Arjun">
+          </div>
+          <div class="form-field">
+            <label for="lname">Last name</label>
+            <input type="text" id="lname" placeholder="Sharma">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="you@example.com">
+          </div>
+          <div class="form-field">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" placeholder="+91 98765 43210">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field full">
+            <label for="reason">I'm interested in</label>
+            <select id="reason">
+              <option value="">Select a topic…</option>
+              <option>Donating to a scholarship</option>
+              <option>Becoming a mentor</option>
+              <option>Corporate / CSR partnership</option>
+              <option>Volunteering on the ground</option>
+              <option>Media or press inquiry</option>
+              <option>Something else</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field full">
+            <label for="msg">Message</label>
+            <textarea id="msg" placeholder="Tell us a bit more about what you have in mind…"></textarea>
+          </div>
+        </div>
+        <button class="form-submit" onclick="this.textContent='Message sent! We\'ll be in touch soon ✓'; this.style.background='#0f6e56';">Send message</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="nav-logo-mark" style="background:var(--accent);width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M12 2L3 9v12h6v-7h6v7h6V9z"/></svg>
+          </div>
+          BrightFuture Foundation
+        </div>
+        <p class="footer-tagline">Empowering underprivileged children through education, mentorship, and community since 2010.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Our work</h4>
+        <ul>
+          <li><a href="#programs">Scholarship Program</a></li>
+          <li><a href="#programs">Code for Bharat</a></li>
+          <li><a href="#programs">Girl Rising</a></li>
+          <li><a href="#impact">Impact reports</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Get involved</h4>
+        <ul>
+          <li><a href="#get-involved">Donate</a></li>
+          <li><a href="#get-involved">Mentor a student</a></li>
+          <li><a href="#get-involved">Corporate CSR</a></li>
+          <li><a href="#contact">Volunteer</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Organisation</h4>
+        <ul>
+          <li><a href="#about">About us</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#">Annual report</a></li>
+          <li><a href="#">Privacy policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2024 BrightFuture Foundation. Reg. KAR/NGO/2010/0472. 80G & FCRA registered.</span>
+      <div class="social-links">
+        <a href="#" class="social-link" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a href="#" class="social-link" aria-label="Twitter / X">
+          <svg viewBox="0 0 24 24"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+        </a>
+        <a href="#" class="social-link" aria-label="Instagram">
+          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
